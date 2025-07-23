@@ -6,8 +6,8 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-// JST (UTC+9) 시간으로 맞추기
-const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000); // 9시간 더함
+// JST (UTC+9)
+const now = new Date(new Date().getTime() + 9 * 60 * 60 * 1000);
 const yyyy = now.getFullYear();
 const mm = String(now.getMonth() + 1).padStart(2, '0');
 const dd = String(now.getDate()).padStart(2, '0');
@@ -27,8 +27,9 @@ try {
   fomo = {};
 }
 
+// 🔥 이전 시간 제거 후 현재 시간만 할당
 productIds.forEach(id => {
-  if (!fomo[id]) fomo[id] = {};
+  fomo[id] = {};  // ← 이거 하나로 해결
   fomo[id][hourKey] = getRandomInt(5, 30);
 });
 
