@@ -21,7 +21,7 @@ if (fs.existsSync('fomo.json')) {
 
 productIds.forEach(id => {
   if (!fomo[id]) fomo[id] = {};
-  fomo[id][hourKey] = getRandomInt(10, 30);
+  fomo[id][hourKey] = getRandomInt(5, 30);
 });
 
 fs.writeFileSync('fomo.json', JSON.stringify(fomo, null, 2));
