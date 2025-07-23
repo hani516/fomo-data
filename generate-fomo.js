@@ -1,4 +1,3 @@
-
 const fs = require('fs');
 
 const productIds = JSON.parse(fs.readFileSync('product_ids.json', 'utf-8'));
@@ -15,8 +14,16 @@ const hh = String(now.getHours()).padStart(2, '0');
 const hourKey = `${yyyy}-${mm}-${dd}-${hh}`;
 
 let fomo = {};
-if (fs.existsSync('fomo.json')) {
-  fomo = JSON.parse(fs.readFileSync('fomo.json', 'utf-8'));
+try {
+  if (fs.existsSync('fomo.json')) {
+    const content = fs.readFileSync('fomo.json', 'utf-8');
+    if (content.trim()) {
+      fomo = JSON.parse(content);
+    }
+  }
+} catch (e) {
+  console.error("❗️fomo.json 파싱 실패:", e);
+  fomo = {}; // 안전하게 초기화
 }
 
 productIds.forEach(id => {
